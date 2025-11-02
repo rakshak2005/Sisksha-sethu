@@ -1,0 +1,67 @@
+/* Apply the Inter font */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Prevent body scroll when modal is open */
+}
+
+/* Custom scrollbar for a dark theme */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #4b5563; /* gray-600 */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* gray-500 */
+}
+::-webkit-scrollbar-track {
+    background: #111827; /* gray-900 */
+}
+
+/* Custom Range Slider for dark theme */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Custom Track */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: #374151; /* gray-700 */
+    border-radius: 3px;
+}
+input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: #374151; /* gray-700 */
+    border-radius: 3px;
+}
+
+/* Custom Thumb (Neon Cyan) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -5px; /* Center thumb */
+    height: 16px;
+    width: 16px;
+    background: #22d3ee; /* cyan-400 */
+    border-radius: 50%;
+    border: none;
+}
+input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    background: #22d3ee; /* cyan-400 */
+    border-radius: 50%;
+    border: none;
+}
+
+/* Custom Neon Glow for Title */
+.neon-title {
+    /* A subtle text shadow to create a glow effect */
+    text-shadow: 0 0 8px theme('colors.cyan.400 / 0.5'), 0 0 20px theme('colors.cyan.500 / 0.3');
+}

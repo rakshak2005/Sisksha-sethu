@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siksha Sethu</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to your new stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-950 text-gray-200">
+
+    <!-- Main Layout Grid -->
+    <!-- On mobile, sidebar is hidden, main takes full width -->
+    <div class="flex h-screen w-full">
+
+        <!-- ===== START SIDEBAR ===== -->
+        <!-- Hidden on mobile (md:flex), modal behavior on mobile (fixed), static on desktop (md:static) -->
+        <aside id="sidebar" class="w-72 flex-shrink-0 bg-gray-900 border-r border-gray-700 p-6 flex-col h-screen
+                        fixed inset-0 z-50
+                        md:static md:flex hidden">
+            
+            <!-- Mobile Header for Sidebar -->
+            <div class="flex justify-between items-center md:hidden mb-6">
+                <h1 class="text-3xl font-bold text-cyan-400 neon-title">Filters</h1>
+                <button id="close-menu-button" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            
+            <!-- Desktop Header for Sidebar -->
+            <h1 class="text-3xl font-bold text-cyan-400 mb-8 neon-title hidden md:block">Siksha Sethu</h1>
+
+            <!-- Navigation Links -->
+            <nav class="flex flex-col space-y-2 mb-8">
+                <a href="#" id="nav-search" class="nav-link active flex items-center space-x-3 px-3 py-2 rounded-lg font-medium text-cyan-400 bg-gray-800">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                    <span>Search Opportunities</span>
+                </a>
+                <a href="#" id="nav-tracker" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg font-medium text-gray-400 hover:bg-gray-800 hover:text-cyan-400">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h12A2.25 2.25 0 0 1 20.25 6v3.776" /></svg>
+                    <span>My Tracker</span>
+                </a>
+                <a href="#" id="nav-calendar" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg font-medium text-gray-400 hover:bg-gray-800 hover:text-cyan-400">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" /></svg>
+                    <span>Deadline Calendar</span>
+                </a>
+            </nav>
+
+            <!-- Filters Section -->
+            <div class="border-t border-gray-700 pt-6 overflow-y-auto">
+                <h2 class="text-xs font-semibold uppercase text-gray-500 mb-4">Filters</h2>
+                
+                <div class="mb-5">
+                    <label for="type" class="block text-sm font-medium text-gray-300 mb-2">Opportunity Type</label>
+                    <select id="type" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm">
+                        <option value="all">All Types</option>
+                        <option value="internship">Internships</option>
+                        <option value="scholarship">Scholarships</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="source" class="block text-sm font-medium text-gray-300 mb-2">Source</label>
+                    <select id="source" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm">
+                        <option value="all">All Sources</option>
+                        <option value="AICTE">AICTE</option>
+                        <option value="Buddy4Study">Buddy4Study</option>
+                        <option value="Internshala">Internshala</option>
+                        <option value="NSP">NSP</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="location" class="block text-sm font-medium text-gray-300 mb-2">Location</label>
+                    <select id="location" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm">
+                        <option value="all">All Locations</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="New Delhi">New Delhi</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Virtual">Virtual</option>
+                        <option value="All India">All India</option>
+                    </select>
+                </div>
+                
+                <div class="mb-5">
+                    <label for="minAmount" class="block text-sm font-medium text-gray-300 mb-2">
+                        Minimum Amount: ₹<span id="minAmountLabel" class="font-bold text-cyan-400">0</span>
+                    </label>
+                    <input
+                        type="range"
+                        id="minAmount"
+                        min="0"
+                        max="20000"
+                        step="1000"
+                        value="0"
+                        class="w-full"
+                    />
+                </div>
+            </div>
+
+            <!-- Profile Button -->
+            <div class="mt-auto border-t border-gray-700 pt-6">
+                <a href="./chatbotpage.html"><button  class="flex w-full items-center space-x-3 px-3 py-2 rounded-lg font-medium text-gray-400 hover:bg-gray-800 hover:text-cyan-400">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                    <span>My AI Chatbot</span>
+                </button></a>
+                
+            </div>
+        </aside>
+        <!-- ===== END SIDEBAR ===== -->
+
+
+        <!-- ===== START MAIN CONTENT ===== -->
+        <main class="flex-1 h-screen overflow-y-auto w-full">
+            
+            <!-- ===== START SEARCH VIEW (DEFAULT) ===== -->
+            <div id="view-search" class="view-content p-4 sm:p-8">
+                
+                <!-- Mobile Header: Title + Menu Button -->
+                <div class="flex justify-between items-center mb-6 md:hidden">
+                    <h1 class="text-2xl font-bold text-cyan-400 neon-title">OpportunityHub</h1>
+                    <button id="menu-toggle-button" class="p-2 rounded-lg bg-gray-800 text-cyan-400">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <input
+                            type="search"
+                            id="search-bar"
+                            placeholder="Search by title, company, or skill..."
+                            class="w-full pl-12 pr-4 py-3 rounded-lg shadow-sm bg-gray-900 border border-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-base"
+                        />
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sort and Count -->
+                <!-- Stacks on mobile (flex-col), row on desktop (sm:flex-row) -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-200 mb-4 sm:mb-0">
+                        Found <span id="opportunity-count" class="text-cyan-400">0</span> Opportunities
+                    </h2>
+                    <div class="flex items-center space-x-2 w-full sm:w-auto">
+                        <label for="sort" class="text-sm font-medium text-gray-400">Sort by:</label>
+                        <select id="sort" class="w-full flex-1 sm:w-auto px-3 py-1.5 bg-gray-800 border border-gray-700 text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 text-sm">
+                            <option value="deadline_asc">Apply By (Soonest)</option>
+                            <option value="amount_desc">Amount (High to Low)</option>
+                            <option value="amount_asc">Amount (Low to High)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Opportunity List -->
+                <div id="opportunity-list" class="bg-gray-900 border border-gray-700 rounded-lg shadow-sm overflow-hidden">
+                    <!-- Opportunity rows will be injected here -->
+                    <div class="p-12 text-center text-gray-500">Loading opportunities...</div>
+                </div>
+            </div>
+            <!-- ===== END SEARCH VIEW ===== -->
+
+
+            <!-- ===== START TRACKER VIEW ===== -->
+            <div id="view-tracker" class="view-content p-4 sm:p-8 hidden">
+                <!-- Mobile Header: Title + Menu Button -->
+                <div class="flex justify-between items-center mb-6 md:hidden">
+                    <h1 class="text-2xl font-bold text-cyan-400 neon-title">My Tracker</h1>
+                    <button id="menu-toggle-button-tracker" class="p-2 rounded-lg bg-gray-800 text-cyan-400">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+                
+                <h1 class="text-3xl font-bold text-gray-200 mb-6 hidden md:block">My Application Tracker</h1>
+                <p class="text-gray-400 mb-8">Drag and drop opportunities to track your application progress.</p>
+                
+                <!-- Responsive 1-column grid, 3-column on desktop -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Column: Saved -->
+                    <div class="bg-gray-950/70 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-gray-200 mb-4">Saved for Later</h3>
+                        <div id="kanban-saved" class="kanban-column min-h-[400px] space-y-4" data-status="saved">
+                            <!-- Tracker cards will be injected here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Column: In Progress -->
+                    <div class="bg-gray-950/70 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-gray-200 mb-4">In Progress</h3>
+                        <div id="kanban-progress" class="kanban-column min-h-[400px] space-y-4" data-status="progress">
+                            <!-- Tracker cards will be injected here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Column: Submitted -->
+                    <div class="bg-gray-950/70 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-gray-200 mb-4">Submitted</h3>
+                        <div id="kanban-submitted" class="kanban-column min-h-[400px] space-y-4" data-status="submitted">
+                            <!-- Tracker cards will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===== END TRACKER VIEW ===== -->
+            
+
+            <!-- ===== START CALENDAR VIEW ===== -->
+            <div id="view-calendar" class="view-content p-4 sm:p-8 hidden">
+                <!-- Mobile Header: Title + Menu Button -->
+                <div class="flex justify-between items-center mb-6 md:hidden">
+                    <h1 class="text-2xl font-bold text-cyan-400 neon-title">Deadline Calendar</h1>
+                    <button id="menu-toggle-button-calendar" class="p-2 rounded-lg bg-gray-800 text-cyan-400">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+                
+                <h1 class="text-3xl font-bold text-gray-200 mb-6 hidden md:block">Deadline Calendar</h1>
+                <p class="text-gray-400 mb-8">Opportunities shown by their "Apply By" date. (Scroll horizontally on mobile)</p>
+                
+                <!-- Horizontal scroll wrapper for mobile -->
+                <div class="overflow-x-auto">
+                    <div class="min-w-[700px]">
+                        <!-- Calendar Grid -->
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-700">
+                            <h2 class="text-2xl font-semibold text-center text-gray-200 mb-6">November 2025</h2>
+                            <!-- Calendar Header -->
+                            <div class="grid grid-cols-7 gap-px text-center text-xs font-semibold text-gray-500 uppercase bg-gray-700 border-t border-l border-gray-700">
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Sun</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Mon</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Tue</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Wed</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Thu</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Fri</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Sat</div>
+                            </div>
+                            <!-- Calendar Body -->
+                            <div id="calendar-grid-nov" class="grid grid-cols-7 gap-px bg-gray-700 border-l border-gray-700">
+                                <!-- Days will be injected here by JS -->
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-700 mt-8">
+                            <h2 class="text-2xl font-semibold text-center text-gray-200 mb-6">December 2025</h2>
+                            <div class="grid grid-cols-7 gap-px text-center text-xs font-semibold text-gray-500 uppercase bg-gray-700 border-t border-l border-gray-700">
+                                <!-- Header -->
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Sun</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Mon</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Tue</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Wed</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Thu</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Fri</div>
+                                <div class="bg-gray-800 p-2 border-r border-b border-gray-700">Sat</div>
+                            </div>
+                            <div id="calendar-grid-dec" class="grid grid-cols-7 gap-px bg-gray-700 border-l border-gray-700">
+                                <!-- Days will be injected here by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===== END CALENDAR VIEW ===== -->
+
+        </main>
+        <!-- ===== END MAIN CONTENT ===== -->
+    </div>
+
+
+    <!-- ===== START MODALS ===== -->
+    
+    <!-- AI Profile Modal -->
+    <div id="profile-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-40 hidden items-center justify-center p-4">
+        <div class="bg-gray-800 w-full max-w-lg rounded-lg shadow-2xl p-6 relative border border-gray-700">
+            <button id="close-profile-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="text-2xl font-bold text-gray-100 mb-4">My AI Profile</h2>
+            <p class="text-gray-400 mb-6">Describe your skills, interests, and background. The AI will use this to calculate a "Match Score" for each opportunity.</p>
+            
+            <label for="profile-bio" class="block text-sm font-medium text-gray-300 mb-2">Your Profile Bio</label>
+            <textarea id="profile-bio" rows="6" class="w-full p-3 bg-gray-700 border border-gray-600 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="E.g., 'I am a 2nd year Computer Science student at IIT Delhi with a 9.2 CGPA. I am proficient in Python, JavaScript, and React. My main interest is in machine learning and data science. I have a personal project on GitHub analyzing stock market data.'"></textarea>
+            
+            <button id="save-profile" class="w-full bg-cyan-600 text-white font-semibold py-3 px-5 rounded-lg hover:bg-cyan-700 transition-colors mt-6">
+                Save Profile & Recalculate Scores
+            </button>
+        </div>
+    </div>
+
+    <!-- Calendar Detail Modal -->
+    <div id="calendar-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-40 hidden items-center justify-center p-4">
+        <div class="bg-gray-800 w-full max-w-md rounded-lg shadow-2xl p-6 relative border border-gray-700">
+            <button id="close-calendar-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="text-2xl font-bold text-gray-100 mb-4" id="calendar-modal-title">Deadlines for...</h2>
+            <div id="calendar-modal-content" class="max-h-60 overflow-y-auto space-y-3">
+                <!-- Modal content injected by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="fixed inset-0 bg-gray-950/70 backdrop-blur-md z-50 flex flex-col items-center justify-center space-y-4 hidden">
+        <svg class="animate-spin h-10 w-10 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p id="loading-text" class="text-lg font-medium text-gray-300">Loading...</p>
+    </div>
+    <!-- ===== END MODALS ===== -->
+
+    <!-- ===== START JAVASCRIPT ===== -->
+    <!-- Link to your new main app logic file -->
+    <script type="module" src="app.js"></script>
+    <!-- ===== END JAVASCRIPT ===== -->
+
+</body>
+</html>
+
